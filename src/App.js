@@ -1,24 +1,28 @@
-import logo from './logo.svg';
-import './App.css';
+import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
+import CreateAdmin from "./components/create-admin-form";
+import SuperAdminLogin from "./components/super_admin_login";
+import { Switch, Route } from "react-router-dom";
+import { Home } from "./components/Home";
+const axios = require("axios");
 
+axios.interceptors.request.use((request, response) => {
+  console.log("requesttttttttttt", request);
+  return request;
+});
+
+axios.interceptors.response.use((response) => {
+  console.log("responseeeeeeeeeeee", response);
+  return response;
+});
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <Switch>
+        {/* <Home></Home> */}
+        <Route path="/" exact><SuperAdminLogin/></Route>
+        <Route path="/login"><CreateAdmin/></Route>
+      </Switch>
+    </>
   );
 }
 
