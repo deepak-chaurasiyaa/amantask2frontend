@@ -47,7 +47,7 @@ const Style = styled.header`
     margin-bottom: -10px;
 }`
 var flag = false;
-const SuperAdminLogin = () => {
+const AdminLogin = () => {
   const [inputs, setInputs] = useState({});
 
   const handleChange = (event) => {
@@ -64,16 +64,27 @@ const SuperAdminLogin = () => {
     }
     setInputs((values) => ({ ...values, [name]: value }));
   };
+const getDataByToken =(token)=>{
+  
+      axios.get("http://localhost:3000/admin/by-token" , { headers: {"Authorization" : `Bearer ${token}`} })
+      .then((res)=>{
+        console.log("token-data",res);
 
+        }).catch((error) => {
+          console.log("error",error)
+        });
+}
   const handleSubmit = (event) => {
     event.preventDefault();
 
     axios
-      .post("http://localhost:3000/super-admin/login", inputs)
+      .post("http://localhost:3000/admin/login", inputs)
       .then((res) => {
-        alert("Login Successful!");
-        console.log("1",res)
+       alert("Login Successful!");
+        // console.log("1",res)
+        
         localStorage.setItem("token",res.data.token);
+        getDataByToken(res.data.token)
         return res;
       })
       .catch((err) => {
@@ -88,7 +99,7 @@ const SuperAdminLogin = () => {
       <div className="loginpagebanner">
         <form onSubmit={handleSubmit} className="form">
           <div className="loginpage">
-            <h2 className="hs2">Super Admin login</h2>
+            <h2 className="hs2">Admin login</h2>
             <div className="secondform">
               <div className="form-group">
                 <label>Email address</label>
@@ -145,4 +156,4 @@ const SuperAdminLogin = () => {
     </>
   );
 };
-export default SuperAdminLogin;
+export default AdminLogin;

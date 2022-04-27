@@ -1,7 +1,55 @@
 import React from "react";
-import "../styles/createAdmin.css";
 import axios from "axios";
+import styled from 'styled-components';
+
+import {NavLink} from 'react-router-dom'
 var flag = false;
+const Style = styled.header`
+.form input{
+    width: 99.6%;
+    font-size: 22px;
+    margin-bottom: 20px;
+  
+}
+.hs2{
+    text-align: center;  
+}
+.secondform{
+  width: 80%;
+  margin-left: 10%;
+}
+
+.loginpagebanner{
+  border-radius: 29px;
+ 
+  width:30%;
+  margin-left:35%;
+  height:700px;
+  color:white;
+  background-color:#153133
+}
+.submit{
+    width:99.6%;
+}
+a{
+  color:#0d6efd;
+}
+.form label{
+    font-size: 18px;
+}
+.checkboxtext{
+    margin-left:-160px;
+}
+.forgot-password{
+    float:right;
+    margin-top:9px;
+}
+.checkbox{
+    margin-left: -168px;
+    width: 20px;
+    height: 20px;
+    margin-bottom: -10px;
+}`
 const CreateAdmin = () => {
     const [inputs, setInputs] = React.useState({});
 
@@ -21,25 +69,24 @@ const CreateAdmin = () => {
   };
   const handleSubmit = (event) => {
     event.preventDefault();
-    alert("Hello")
-    console.log(inputs)
     axios
       .post("http://localhost:3000/admin", inputs)
       .then((res) => {
-        alert("Login Successful!");
+        alert("User Created Successfully!");
         return res;
       })
       .catch((err) => {
-        alert("No Super-User Found, Please Provide valid details!");
+        alert("User Creation Failed!");
         console.log(err);
         return err;
       });
   };
   return (
     <>
-      <div className="loginpagebanner">
+     <Style>
+     <div className="loginpagebanner">
         <form className="form" onSubmit={handleSubmit}>
-          <h2 className = "hs2">Sign Up</h2>
+          <h2 className = "hs2">Create Admin</h2>
           <div className="secondform">
             <div className="form-group">
               <label>First name</label>
@@ -111,11 +158,12 @@ const CreateAdmin = () => {
               Sign Up
             </button>
             <p className="forgot-password text-right">
-              Already registered <a href="#">sign in?</a>
+              Already registered <NavLink to="/admin-login">sign in?</NavLink>
             </p>
           </div>
         </form>
       </div>
+     </Style>
     </>
   );
 };
