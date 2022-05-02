@@ -2,7 +2,7 @@ import React from "react";
 import axios from "axios";
 import styled from "styled-components";
 
-import { NavLink } from "react-router-dom";
+import { NavLink,useHistory } from "react-router-dom";
 var flag = false;
 const Style = styled.header`
   .form input {
@@ -51,6 +51,7 @@ const Style = styled.header`
   }
 `;
 const CreateUser = () => {
+  const history = useHistory();
   const [inputs, setInputs] = React.useState({});
 
   const handleChange = (event) => {
@@ -79,6 +80,7 @@ const CreateUser = () => {
           const token = (res.data.jsontoken) ;
           localStorage.setItem('token',token)
           alert("user created successfully!")
+          history.push("/products")
         }
         else{
           alert("User Exists already With this Email Address")

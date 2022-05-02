@@ -1,39 +1,27 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
+import { Button } from "react-bootstrap";
+import "./navx.css"
+
 const NavBar = () => {
   return (
     <>
-      <div>
-        <NavLink to="/super-admin-login">
-        <button className="button">Administration login</button>
+      <div className="navx" >
+        <NavLink to="create-admin">
+          <Button className="button">Create Admin</Button>
         </NavLink>
-       <NavLink to="create-admin">
-       <button className="button">Create Admin</button>
-       </NavLink>
-       <NavLink to="all-admin">
-       <button className="button">All Admin List</button>
-       </NavLink>
-       <NavLink to="admin-login">
-       <button className="button">Admin Login</button>
-       </NavLink>
-       <NavLink to="create-user">
-       <button className="button">Create User</button>
-       </NavLink>
-       <NavLink to="all-user">
-       <button className="button">All User's List</button>
-       </NavLink>
-       <NavLink to="user-data">
-       <button className="button">User after siginup</button>
-       </NavLink>
-       <NavLink to="products">
-       <button className="button">Products List</button>
-       </NavLink>
-       <NavLink to="user-login">
-       <button className="button">User Login</button>
-       </NavLink>
-       <NavLink to="create-product">
-       <button className="button">Create Products</button>
-       </NavLink>
+        <NavLink to="all-admin">
+          <Button className="button">All Admin List</Button>
+        </NavLink>
+        <NavLink to="all-user">
+          <Button className="button">All User's List</Button>
+        </NavLink>
+        <NavLink to="admin-login">
+          <Button className="button">Admin Login</Button>
+        </NavLink>
+        <NavLink to="create-product">
+          <Button className="button">Create Products</Button>
+        </NavLink>
       </div>
     </>
   );

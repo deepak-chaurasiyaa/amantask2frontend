@@ -30,6 +30,7 @@ const CreateProduct = () => {
         alert("Product Created Successfully!!");
       })
       .catch((error) => {
+        alert(error)
         console.log("error", error);
       });
   };

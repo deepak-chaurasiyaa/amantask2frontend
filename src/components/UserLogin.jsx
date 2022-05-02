@@ -1,6 +1,7 @@
 import { useState } from "react";
 import axios from "axios";
 import React from "react";
+import { useHistory, NavLink } from "react-router-dom";
 import styled from 'styled-components';
 const Style = styled.header`
 .form input{
@@ -48,6 +49,7 @@ const Style = styled.header`
 }`
 var flag = false;
 const UserLogin = () => {
+   const history = useHistory();
   const [inputs, setInputs] = useState({});
 
   const handleChange = (event) => {
@@ -66,82 +68,87 @@ const UserLogin = () => {
   };
 
   const handleSubmit = (event) => {
+    
     event.preventDefault();
 
     axios
       .post("http://localhost:3000/user/login", inputs)
       .then((res) => {
         alert("Login Successful!");
-        console.log("1111111111111111111",res.data.token)
+       
+        history.push("/products");
+        // console.log("1111111111111111111",res.data.token)
         localStorage.setItem("token",res.data.token);
         
         return res;
       })
       .catch((err) => {
         alert("No User Found, Please Provide valid details!");
-        console.log(err);
+        // console.log(err);
         return err;
       });
   };
   return (
     <>
       <Style>
-      <div className="loginpagebanner">
-        <form onSubmit={handleSubmit} className="form">
-          <div className="loginpage">
-            <h2 className="hs2">User login</h2>
-            <div className="secondform">
-              <div className="form-group">
-                <label>Email address</label>
-                <input
-                  className="form-control"
-                  type="text"
-                  name="email"
-                  placeholder="Enter Email"
-                  value={inputs.email || ""}
-                  onChange={handleChange}
-                />
-              </div>
-              <div className="form-group">
-                <label>Password</label>
-                <input
-                  className="form-control"
-                  type="password"
-                  name="password"
-                  placeholder="Enter Password"
-                  value={inputs.password || ""}
-                  onChange={handleChange}
-                />
-              </div>
-              <div className="form-group">
-                <div className="custom-control custom-checkbox">
+        <div className="loginpagebanner">
+          <form onSubmit={handleSubmit} className="form">
+            <div className="loginpage">
+              <h2 className="hs2">User login</h2>
+              <div className="secondform">
+                <div className="form-group">
+                  <label>Email address</label>
                   <input
-                    type="checkbox"
-                    className="custom-control-input checkbox"
-                    id="customCheck1"
+                    className="form-control"
+                    type="text"
+                    name="email"
+                    placeholder="Enter Email"
+                    value={inputs.email || ""}
+                    onChange={handleChange}
                   />
-                  <label
-                    className="custom-control-label checkboxtext"
-                    htmlFor="customCheck1"
-                  >
-                    Remember me
-                  </label>
                 </div>
-              </div>
-         
+                <div className="form-group">
+                  <label>Password</label>
+                  <input
+                    className="form-control"
+                    type="password"
+                    name="password"
+                    placeholder="Enter Password"
+                    value={inputs.password || ""}
+                    onChange={handleChange}
+                  />
+                </div>
+                <div className="form-group">
+                  <div className="custom-control custom-checkbox">
+                    <input
+                      type="checkbox"
+                      className="custom-control-input checkbox"
+                      id="customCheck1"
+                    />
+                    <label
+                      className="custom-control-label checkboxtext"
+                      htmlFor="customCheck1"
+                    >
+                      Remember me
+                    </label>
+                  </div>
+                </div>
+
                 <button
                   type="submit"
                   className="btn btn-primary btn-block submit"
                 >
                   Submit
                 </button>
-              <p className="forgot-password text-right">
-                Forgot <a href="#">password?</a>
-              </p>
+                
+                  <p className="forgot-password text-right">
+                    Forgot <NavLink to = "/password-reset-mail">password?</NavLink>
+                  </p>
+               
+              </div>
             </div>
-          </div>
-        </form>
-      </div>
+          </form>
+        </div>
       </Style>
     </>
   );

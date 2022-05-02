@@ -1,6 +1,7 @@
 import { useState } from "react";
 import axios from "axios";
 import React from "react";
+import { useHistory } from "react-router-dom";
 import styled from 'styled-components';
 const Style = styled.header`
 .form input{
@@ -48,6 +49,7 @@ const Style = styled.header`
 }`
 var flag = false;
 const SuperAdminLogin = () => {
+  const history = useHistory();
   const [inputs, setInputs] = useState({});
 
   const handleChange = (event) => {
@@ -74,6 +76,7 @@ const SuperAdminLogin = () => {
         alert("Login Successful!");
         console.log("1",res)
         localStorage.setItem("token",res.data.token);
+        history.push("/navbar")
         return res;
       })
       .catch((err) => {

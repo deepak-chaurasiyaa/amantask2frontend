@@ -12,6 +12,10 @@ import UserAfterSignup from "./components/UserAfterSignup"
 import UserLogin from "./components/UserLogin"
 import CreateProduct from "./components/CreateProduct"
 import ShowUserCart from "./components/ShowUserCart";
+import HomePage from "./components/HomePage";
+import UserNavBar from "./components/UserNavBar";
+import PasswordResetMail from "./components/ForgotPassword";
+import SetNewPassword from "./components/SetNewPassword";
 const axios = require("axios");
 
 axios.interceptors.request.use(
@@ -33,7 +37,8 @@ function App() {
   return (
     <>
       <Switch>
-        <Navbar exact path="/" component={Navbar} />
+        <Route exact path="/" component={HomePage} />
+        <Navbar exact path="/navbar" component={Navbar} />
         <Route path="/super-admin-login" component={SuperAdminLogin} />
         <Route path="/create-admin" component={CreateAdmin} />
         <Route path="/all-admin" component={allAdmin} />
@@ -45,6 +50,9 @@ function App() {
         <Route path="/user-login" component={UserLogin} />
         <Route path="/create-product" component={CreateProduct} />
         <Route path="/cart" component={ShowUserCart} />
+        <Route path="/user" component={UserNavBar} />
+        <Route path="/password-reset-mail" component={PasswordResetMail} />
+        <Route path="/set-new-password" component={SetNewPassword} />
       </Switch>
     </>
   );

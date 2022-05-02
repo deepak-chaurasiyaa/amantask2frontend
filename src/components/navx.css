@@ -1,0 +1,11 @@
+.navx{
+    margin-top: 50px;
+    display:flex;
+    justify-content:space-around
+}
+.button{
+    width:300px;
+    height: 200px;
+    padding:20;
+    font-size:20px
+}

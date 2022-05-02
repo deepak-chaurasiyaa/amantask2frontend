@@ -81,14 +81,12 @@ const getDataByToken =(token)=>{
       .post("http://localhost:3000/admin/login", inputs)
       .then((res) => {
        alert("Login Successful!");
-        // console.log("1",res)
-        
         localStorage.setItem("token",res.data.token);
         getDataByToken(res.data.token)
         return res;
       })
       .catch((err) => {
-        alert("No Super-User Found, Please Provide valid details!");
+        alert("No admin found!");
         console.log(err);
         return err;
       });
